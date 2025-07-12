@@ -1,0 +1,30 @@
+{
+	"name": "Curso Backend",
+	"version": "1.0.0",
+	"description": "Este é o primeiro projeto da turma de Backend",
+	"main": "index.ts",
+	"type": "module",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"server": "node --watch --import ./register-loader.mjs src/index.ts"
+	},
+	"keywords": [
+		"skate",
+		"skateSpot"
+	],
+	"author": "Eduardo Burko",
+	"license": "MIT",
+	"packageManager": "pnpm@10.13.1",
+	"dependencies": {
+		"@fastify/type-provider-typebox": "^5.1.0",
+		"@sinclair/typebox": "^0.34.37",
+		"fastify": "^5.4.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.1.1",
+		"@types/node": "^24.0.13",
+		"nodemon": "^3.1.10",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.8.3"
+	}
+}

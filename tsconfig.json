@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "es2020",
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "allowImportingTsExtensions": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "ts-node": {
+        "esm": true
+    },
+    "include": ["./**/*.ts"], 
+    "exclude": ["node_modules", "dist"]
+}
