@@ -2,6 +2,7 @@ import Fastify from "fastify";
 import usersRoutes from "./routes/users.ts";
 import customersRoutes from "./routes/customers.ts";
 import { connectDatabase } from "./config/database.ts";
+import productsRoutes from "./routes/products.ts";
 
 async function start() {
 	const fastify = Fastify({
@@ -9,6 +10,7 @@ async function start() {
 	});
 
 	fastify.register(usersRoutes, { prefix: "/users" });
+	fastify.register(productsRoutes, { prefix: "/products" });
 	fastify.register(customersRoutes, { prefix: "/customers" });
 
 	await connectDatabase();

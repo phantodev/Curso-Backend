@@ -1,51 +1,68 @@
 import type { FastifyInstance } from "fastify";
 import { Customer } from "../model/customerSchema.ts";
 import type { IError, QueryParams } from "../types/types.ts";
-import { SortOrder } from "mongoose";
+import {SortOrder} from 'mongoose'
+import { Product } from "../model/productSchema.ts";
 
-export default async function customersRoutes(fastify: FastifyInstance) {
+export default async function productsRoutes(fastify: FastifyInstance) {
 	fastify.get("/", async (request, reply) => {
 		try {
-			const {
-				page = 1,
-				itemsPerPage = 2,
-				sort = "createdAt",
-				order = "desc",
-			} = request.query as QueryParams;
+			const {page = 1, itemsPerPage = 2, sort = "createdAt", order = "desc", name, minPrice, maxPrice} = request.query as QueryParams & { 
+				name?: string;
+				minPrice?: string;
+				maxPrice?: string;
+			}
 
-			const skip = (Number(page) - 1) * Number(itemsPerPage);
+			const skip = (page - 1) * itemsPerPage
 
-			const sortOrder = order === "asc" ? 1 : -1;
+			const sortOrder = order === 'asc' ? 1 : -1
 
-			const sortObject: Record<string, SortOrder> = { [sort]: sortOrder };
+			const sortObject: Record<string, SortOrder> = { [sort]: sortOrder}
 
-			const [customers, total] = await Promise.all([
-				Customer.find()
-					.sort(sortObject)
-					.skip(skip)
-					.limit(Number(itemsPerPage))
-					.lean(),
-				Customer.countDocuments(),
-			]);
+			// Criar filtro para busca por nome (similar ao LIKE do SQL)
+			const filter: any = {}
+			if (name) {
+				filter.name = { $regex: name, $options: 'i' } // 'i' para case-insensitive
+			}
 
-			const totalPages = Math.ceil(total / Number(itemsPerPage));
-			const hasNext = Number(page) < Number(totalPages);
-			const hasPrev = Number(page) > 1;
+			// Filtro por faixa de preço
+			if (minPrice || maxPrice) {
+				filter.price = {}
+				if (minPrice) {
+					filter.price.$gte = parseFloat(minPrice)
+				}
+				if (maxPrice) {
+					filter.price.$lte = parseFloat(maxPrice)
+				}
+			}
 
-			reply.code(200);
+			const [products, total] = await Promise.all([
+				Product.find(filter)
+				.sort(sortObject)
+				.skip(skip)
+				.limit(itemsPerPage)
+				.lean(),
+				Product.countDocuments(filter)
+			])
+           
+			const totalPages = Math.ceil(total / itemsPerPage)
+			const hasNext = page < totalPages
+			const hasPrev = page > 1
+
+			reply.code(200)
 			return {
-				data: customers,
+				data: products,
 				pagination: {
 					page,
 					itemsPerPage,
 					total,
 					hasNext,
-					hasPrev,
-				},
-			};
+					hasPrev
+				}
+			}
 		} catch (error) {
-			reply.code(400);
-			return error;
+			reply.code(400)
+			return error
 		}
 	});
 

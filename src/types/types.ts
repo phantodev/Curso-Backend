@@ -17,8 +17,25 @@ export interface IError {
 }
 
 export type QueryParams = {
-	page?: number;
-	itemsPerPage?: number;
+	page?: string;
+	itemsPerPage?: string;
 	sort?: string;
 	order?: "asc" | "desc";
+	name?: string;
+	minPrice?: string;
+	maxPrice?: string;
+	status?: string;
+};
+
+export type TProducts = {
+	name: string;
+	description: string;
+	category: string;
+	price: number;
+};
+
+export type TFilterProducts = {
+	name?: { $regex: string; $options: string };
+	price?: any;
+	status?: any;
 };
