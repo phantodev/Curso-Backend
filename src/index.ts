@@ -3,6 +3,7 @@ import usersRoutes from "./routes/users.ts";
 import customersRoutes from "./routes/customers.ts";
 import { connectDatabase } from "./config/database.ts";
 import productsRoutes from "./routes/products.ts";
+import customerProductsRoutes from "./routes/customer-products.ts";
 
 async function start() {
 	const fastify = Fastify({
@@ -10,6 +11,7 @@ async function start() {
 	});
 
 	fastify.register(usersRoutes, { prefix: "/users" });
+	fastify.register(customerProductsRoutes, { prefix: "/customer-products" });
 	fastify.register(productsRoutes, { prefix: "/products" });
 	fastify.register(customersRoutes, { prefix: "/customers" });
 
