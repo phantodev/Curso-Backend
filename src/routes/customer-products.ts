@@ -155,7 +155,7 @@ export default async function customerProductsRoutes(fastify: FastifyInstance) {
 		}
 	});
 
-	fastify.post("/:customerId/favorites/remove", async (request, reply) => {
+	fastify.delete("/:customerId/favorites/remove", async (request, reply) => {
 		const { customerId } = request.params as { customerId: string };
 
 		if (!mongoose.Types.ObjectId.isValid(customerId)) {

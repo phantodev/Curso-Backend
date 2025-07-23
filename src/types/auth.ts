@@ -15,3 +15,10 @@ export interface JWTPayload {
 	iss?: string;
 	aud?: string;
 }
+
+export type TAuthRegister = {
+		name: string;
+		email: string;
+		age: number;
+		password: string;
+	};
