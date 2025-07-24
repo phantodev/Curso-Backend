@@ -5,12 +5,38 @@ import { connectDatabase } from "./config/database.ts";
 import productsRoutes from "./routes/products.ts";
 import customerProductsRoutes from "./routes/customer-products.ts";
 import authRoutes from "./routes/auth.ts";
+import uploadRoutes from "./routes/upload.ts";
+import multipart from "@fastify/multipart";
 
 async function start() {
 	const fastify = Fastify({
 		logger: true,
+		// Configuração para aceitar arquivos binários
+		bodyLimit: 10485760, // 10MB
 	});
 
+	// Registrar plugin multipart
+	await fastify.register(multipart, {
+		limits: {
+			fileSize: 10 * 1024 * 1024, // 10MB por arquivo
+			files: 10, // Máximo 10 arquivos
+		}
+	});
+
+	// Configurar para aceitar arquivos binários (mantém compatibilidade)
+	fastify.addContentTypeParser('application/octet-stream', { parseAs: 'buffer' }, (req, body, done) => {
+		done(null, body);
+	});
+
+	fastify.addContentTypeParser('image/*', { parseAs: 'buffer' }, (req, body, done) => {
+		done(null, body);
+	});
+
+	fastify.addContentTypeParser('*/*', { parseAs: 'buffer' }, (req, body, done) => {
+		done(null, body);
+	});
+
+	fastify.register(uploadRoutes, { prefix: "/upload" });
 	fastify.register(usersRoutes, { prefix: "/users" });
 	fastify.register(authRoutes, { prefix: "/auth" });
 	fastify.register(customerProductsRoutes, { prefix: "/customer-products" });
