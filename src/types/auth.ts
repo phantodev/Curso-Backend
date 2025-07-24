@@ -1,3 +1,5 @@
+import { FastifyRequest } from "fastify";
+
 // Interface para o payload do JWT
 export interface JWTPayload {
 	user: {
@@ -17,8 +19,12 @@ export interface JWTPayload {
 }
 
 export type TAuthRegister = {
-		name: string;
-		email: string;
-		age: number;
-		password: string;
-	};
+	name: string;
+	email: string;
+	age: number;
+	password: string;
+};
+
+export interface CustomRequest extends FastifyRequest {
+	user?: JWTPayload["user"];
+}

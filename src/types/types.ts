@@ -38,4 +38,5 @@ export type TFilterProducts = {
 	name?: { $regex: string; $options: string };
 	price?: any;
 	status?: any;
+	clientId?: string;
 };

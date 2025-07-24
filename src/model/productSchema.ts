@@ -23,6 +23,10 @@ const productSchema = new mongoose.Schema({
 		required: true,
 		default: Date.now, // O campo "createdAt" será preenchido com a data atual por padrão
 	},
+	clientId: {
+		type: String,
+		required: true,
+	},
 });
 
 // Criando o Modelo a partir do Schema
