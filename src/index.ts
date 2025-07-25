@@ -45,12 +45,16 @@ async function start() {
 
 	await connectDatabase();
 
-	fastify.listen({ port: 4500 }, (err, address) => {
+	const port = process.env.PORT || 4500;
+	const host = process.env.HOST || '0.0.0.0';
+
+	fastify.listen({ port: Number(port), host }, (err, address) => {
 		if (err) {
 			fastify.log.error(err);
 			process.exit(1);
 		}
-		console.log("Aplicação rodando que nem um foguete! ✔");
+		console.log(`Aplicação rodando que nem um foguete! ✔`);
+		console.log(`Servidor rodando em: ${address}`);
 	});
 }
 
