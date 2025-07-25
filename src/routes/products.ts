@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
-import { productsController } from "../controller/productsController.ts";
-import { authenticateToken, authorizeRoles } from "../middleware/auth.ts";
+import { productsController } from "../controller/productsController";
+import { authenticateToken, authorizeRoles } from "../middleware/auth";
 
 export default async function productsRoutes(fastify: FastifyInstance) {
 	fastify.get(

@@ -1,8 +1,8 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import type { QueryParams, TFilterProducts, TProducts } from "../types/types";
-import { Product } from "../model/productSchema.ts";
+import { Product } from "../model/productSchema";
 import type { SortOrder } from "mongoose";
-import { CustomRequest } from "../types/auth.ts";
+import { CustomRequest } from "../types/auth";
 
 export const productsController = {
 	getAllProducts: async (request: CustomRequest, reply: FastifyReply) => {

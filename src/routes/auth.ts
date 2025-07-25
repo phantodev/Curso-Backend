@@ -1,5 +1,5 @@
 import type { FastifyInstance } from "fastify";
-import { authController } from "../controller/authController.ts";
+import { authController } from "../controller/authController";
 
 export default async function authRoutes(fastify: FastifyInstance) {
 	fastify.post("/login",authController.login );

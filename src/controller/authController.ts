@@ -1,11 +1,11 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import type { TAuthRegister } from "../types/auth.ts";
-import { Customer } from "../model/customerSchema.ts";
-import { Auth } from "../model/authSchema.ts";
-import type { IError } from "../types/types.ts";
+import type { TAuthRegister } from "../types/auth";
+import { Customer } from "../model/customerSchema";
+import { Auth } from "../model/authSchema";
+import type { IError } from "../types/types";
 import bcrypt from "bcryptjs";
-import { authLoginSchema } from "../zod-schemas/auth-schema.ts";
-import { generateAccessToken } from "../config/jwt.ts";
+import { authLoginSchema } from "../zod-schemas/auth-schema";
+import { generateAccessToken } from "../config/jwt";
 
 export const authController = {
 	login: async (request: FastifyRequest, reply: FastifyReply) => {

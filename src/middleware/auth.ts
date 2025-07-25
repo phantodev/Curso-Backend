@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import jwt from "jsonwebtoken";
-import type { CustomRequest, JWTPayload } from "../types/auth.ts";
+import type { CustomRequest, JWTPayload } from "../types/auth";
 
 const JWT_SECRET =
 	process.env.JWT_SECRET || "seu-secret-super-seguro-aqui-2025";

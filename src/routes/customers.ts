@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
-import { Customer } from "../model/customerSchema.ts";
-import type { IError, QueryParams } from "../types/types.ts";
+import { Customer } from "../model/customerSchema";
+import type { IError, QueryParams } from "../types/types";
 import { SortOrder } from "mongoose";
 
 export default async function customersRoutes(fastify: FastifyInstance) {

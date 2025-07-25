@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
-import { Customer } from "../model/customerSchema.ts";
-import { Product } from "../model/productSchema.ts";
+import { Customer } from "../model/customerSchema";
+import { Product } from "../model/productSchema";
 import mongoose from "mongoose";
 import { z } from "zod";
 // import productsController from "../controller/productsController.ts";

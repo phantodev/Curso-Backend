@@ -1,5 +1,5 @@
 import type { FastifyInstance } from "fastify";
-import { uploadFile, uploadMultipleFiles } from "../controller/uploadController.ts";
+import { uploadFile, uploadMultipleFiles } from "../controller/uploadController";
 
 
 export default async function uploadRoutes(fastify: FastifyInstance) {

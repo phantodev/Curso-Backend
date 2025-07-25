@@ -1,11 +1,11 @@
 import Fastify from "fastify";
-import usersRoutes from "./routes/users.ts";
-import customersRoutes from "./routes/customers.ts";
-import { connectDatabase } from "./config/database.ts";
-import productsRoutes from "./routes/products.ts";
-import customerProductsRoutes from "./routes/customer-products.ts";
-import authRoutes from "./routes/auth.ts";
-import uploadRoutes from "./routes/upload.ts";
+import usersRoutes from "./routes/users";
+import customersRoutes from "./routes/customers";
+import { connectDatabase } from "./config/database";
+import productsRoutes from "./routes/products";
+import customerProductsRoutes from "./routes/customer-products";
+import authRoutes from "./routes/auth";
+import uploadRoutes from "./routes/upload";
 import multipart from "@fastify/multipart";
 
 async function start() {
